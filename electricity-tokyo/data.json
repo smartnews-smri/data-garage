@@ -1,9 +1,9 @@
 {
-	"file_update": "2022-07-09 15:41:34",
+	"file_update": "2022-07-09 15:47:40",
 	"data_update": "2022/7/9 23:55",
 	"peak_time": "13:00 〜 14:00",
-	"peak_demand": "4811",
-	"peak_supply": "3837",
+	"peak_supply": "4811",
+	"peak_demand": "3837",
 	"peak_ratio": "79",
 	"hourly_data": [
 		["2022/7/9", "0:00", "2793", "2768", "83", "3364"],
