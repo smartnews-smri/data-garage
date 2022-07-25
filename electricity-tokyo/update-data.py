@@ -5,7 +5,7 @@ import requests
 import json
 
 
-DIR_DATA = "./"
+DIR_DATA = "./electricity-tokyo/"
 
 
 url = "https://www.tepco.co.jp/forecast/html/images/juyo-d1-j.csv"
