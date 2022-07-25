@@ -17,10 +17,14 @@ result = {
   "config": {
     "base": {
       "grid": {
-        "left": 40,
+        "left": 10,
         "right": 0,
-        "top": 10,
-        "bottom": 80
+        "top": 36,
+        "bottom": 0,
+        "containLabel": True
+      },
+      "legend": {
+        "data": ["実績使用量", "予想使用量", "実績供給力", "予想供給力"]
       },
       "xAxis": {
         "type": "category",
@@ -29,27 +33,35 @@ result = {
       "yAxis": {
         "type": "value"
       },
-      "series": [
-        {
+      "series": [{
           "data": [],
+          "name": "実績使用量",
           "type": "bar",
           "stack": "total"
         }, {
           "data": [],
+          "name": "予想使用量",
           "type": "bar",
           "stack": "total"
         }, {
           "data": [],
+          "name": "実績供給力",
           "type": "line",
           "step": "middle"
         }, {
           "data": [],
+          "name": "予想供給力",
           "type": "line",
           "step": "middle"
         }
       ]
     },
     "light": {
+      "legend": {
+        "textStyle": {
+          "color": "#666666"
+        }
+      },
       "xAxis": {
         "type": "category",
         "axisLine": {
@@ -81,6 +93,11 @@ result = {
       ]
     },
     "dark": {
+      "legend": {
+        "textStyle": {
+          "color": "#eeeeee"
+        }
+      },
       "xAxis": {
         "axisLine": {
           "onZero": False,
@@ -202,4 +219,9 @@ with open(DIR_DATA + "update-time.json", 'w') as f:
   json.dump(latest, f, ensure_ascii = False)
 
 
-  
+
+
+
+
+
+
