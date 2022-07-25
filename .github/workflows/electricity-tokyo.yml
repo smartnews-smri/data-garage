@@ -29,5 +29,5 @@ jobs:
         run: |
           git add .
           git commit -m "Update data" -a
-          git pull
+          git config pull.rebase false
           git push origin main
