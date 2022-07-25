@@ -106,6 +106,16 @@ result = {
   }
 }
 
+isPast = True
+current_info = {
+  "ratio":  "",
+  "label":  "",
+  "time":   "",
+  "demand": "",
+  "supply": "",
+  "color":  ""
+}
+
 for i in range(14, 38):
   row = rows[i].split(",")
 
@@ -114,6 +124,27 @@ for i in range(14, 38):
     past_supply = None
     future_demand = int(row[3])
     future_supply = int(row[5])
+
+    # Get current info
+    if isPast:
+      current_row = rows[i - 1].split(",")
+      current_info["ratio"]  = current_row[4]
+      current_info["time"]   = current_row[1]
+      current_info["demand"] = current_row[2]
+      current_info["supply"] = current_row[5]
+      current_info["label"]  = "安定的"
+      current_info["color"]  = "#4dad38"
+
+      if int(current_info["ratio"]) >= 92:
+        current_info["label"]  = "厳しい"
+        current_info["color"]  = "#ffcc17"
+
+      if int(current_info["ratio"]) >= 97:
+        current_info["label"]  = "非常に厳しい"
+        current_info["color"]  = "#fb1b2a"
+
+      isPast = False
+
   else:
     past_demand = int(row[2])
     past_supply = int(row[5])
@@ -129,6 +160,25 @@ for i in range(14, 38):
 # Save file
 with open(DIR_DATA + "component-chart.json", 'w') as f:
   json.dump(result, f, ensure_ascii = False)
+
+
+# Update "component-markdown.json"
+mdtext  = "現在の電力使用率"
+mdtext += "\n# " + current_info["ratio"] + "％"
+mdtext += "\n### ［" + current_info["label"] + "］"
+mdtext += "\n###### 当日実績" + current_info["demand"] + "万kW / 供給力" + current_info["supply"] + "万kW、" + current_info["time"] + "時点"
+mdtext += "\n本日の電力使用率推移"
+
+markdown = {
+  "componentName": "Markdown",
+  "config": {
+    "markdown": mdtext
+  }
+}
+
+with open(DIR_DATA + "component-markdown.json", 'w') as f:
+  json.dump(markdown, f, ensure_ascii = False)
+
 
 
 # Update "update-time.json"
