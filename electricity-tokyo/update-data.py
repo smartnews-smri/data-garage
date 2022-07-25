@@ -115,12 +115,12 @@ result = {
 
 isPast = True
 current_info = {
-  "ratio":  "",
-  "label":  "",
-  "time":   "",
-  "demand": "",
-  "supply": "",
-  "color":  ""
+  "ratio":  "--",
+  "label":  "データなし",
+  "time":   "0:00",
+  "demand": "--",
+  "supply": "--",
+  "color":  "#aaaaaa"
 }
 
 for i in range(14, 38):
@@ -134,23 +134,27 @@ for i in range(14, 38):
 
     # Get current info
     if isPast:
-      current_row = rows[i - 1].split(",")
-      current_info["ratio"]  = current_row[4]
-      current_info["time"]   = current_row[1]
-      current_info["demand"] = current_row[2]
-      current_info["supply"] = current_row[5]
-      current_info["label"]  = "安定的"
-      current_info["color"]  = "#4dad38"
-
-      if int(current_info["ratio"]) >= 92:
-        current_info["label"]  = "厳しい"
-        current_info["color"]  = "#ffcc17"
-
-      if int(current_info["ratio"]) >= 97:
-        current_info["label"]  = "非常に厳しい"
-        current_info["color"]  = "#fb1b2a"
-
       isPast = False
+
+      if i >= 15:
+        current_row = rows[i - 1].split(",")
+        current_info["ratio"]  = current_row[4]
+        current_info["time"]   = current_row[1]
+        current_info["demand"] = current_row[2]
+        current_info["supply"] = current_row[5]
+        current_info["label"]  = "安定的"
+        current_info["color"]  = "#4dad38"
+
+        print(i)
+        print(current_info)
+
+        if int(current_info["ratio"]) >= 92:
+          current_info["label"]  = "厳しい"
+          current_info["color"]  = "#ffcc17"
+
+        if int(current_info["ratio"]) >= 97:
+          current_info["label"]  = "非常に厳しい"
+          current_info["color"]  = "#fb1b2a"
 
   else:
     past_demand = int(row[2])
@@ -198,6 +202,4 @@ with open(DIR_DATA + "update-time.json", 'w') as f:
   json.dump(latest, f, ensure_ascii = False)
 
 
-
-
-
+  
