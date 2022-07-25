@@ -74,9 +74,10 @@ result = {
         }
       },
       "color": [
-        "#f00",
-        "#fff",
-        "#fff"
+        '#ABD3B1',
+        '#607CC4',
+        '#F7DE9B',
+        '#FCD055'
       ]
     },
     "dark": {
@@ -101,7 +102,13 @@ result = {
             "width": 0.5
           }
         }
-      }
+      },
+      "color": [
+        '#ABD3B1',
+        '#607CC4',
+        '#F7DE9B',
+        '#FCD055'
+      ]
     }
   }
 }
@@ -189,4 +196,8 @@ latest = {
 }
 with open(DIR_DATA + "update-time.json", 'w') as f:
   json.dump(latest, f, ensure_ascii = False)
+
+
+
+
 
