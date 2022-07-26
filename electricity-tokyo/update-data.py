@@ -24,7 +24,7 @@ result = {
         "containLabel": True
       },
       "legend": {
-        "data": ["実績使用量", "予想使用量", "実績供給力", "予想供給力"]
+        "data": ["需要実績", "需要予想", "供給実績", "供給予想"]
       },
       "xAxis": {
         "type": "category",
@@ -35,24 +35,28 @@ result = {
       },
       "series": [{
           "data": [],
-          "name": "実績使用量",
+          "name": "需要実績",
           "type": "bar",
           "stack": "total"
         }, {
           "data": [],
-          "name": "予想使用量",
+          "name": "需要予想",
           "type": "bar",
           "stack": "total"
         }, {
           "data": [],
-          "name": "実績供給力",
+          "name": "供給実績",
           "type": "line",
-          "step": "middle"
+          "lineStyle": {
+            "width": 4
+          }
         }, {
           "data": [],
-          "name": "予想供給力",
+          "name": "供給予想",
           "type": "line",
-          "step": "middle"
+          "lineStyle": {
+            "width": 4
+          }
         }
       ]
     },
@@ -86,10 +90,10 @@ result = {
         }
       },
       "color": [
-        '#ABD3B1',
-        '#607CC4',
-        '#F7DE9B',
-        '#FCD055'
+        '#c2beb4',
+        '#FCD055',
+        '#d4a9a5',
+        '#f57064'
       ]
     },
     "dark": {
@@ -121,10 +125,10 @@ result = {
         }
       },
       "color": [
-        '#ABD3B1',
-        '#607CC4',
-        '#F7DE9B',
-        '#FCD055'
+        '#c2beb4',
+        '#FCD055',
+        '#d4a9a5',
+        '#f57064'
       ]
     }
   }
@@ -162,9 +166,6 @@ for i in range(14, 38):
         current_info["label"]  = "安定的"
         current_info["color"]  = "#4dad38"
 
-        print(i)
-        print(current_info)
-
         if int(current_info["ratio"]) >= 92:
           current_info["label"]  = "厳しい"
           current_info["color"]  = "#ffcc17"
@@ -191,10 +192,12 @@ with open(DIR_DATA + "component-chart.json", 'w') as f:
 
 
 # Update "component-markdown.json"
+dt_now = datetime.datetime.now() + datetime.timedelta(hours = 9)
+
 mdtext  = "現在の電力使用率"
 mdtext += "\n# " + current_info["ratio"] + "％"
 mdtext += "\n### ［" + current_info["label"] + "］"
-mdtext += "\n###### 当日実績" + current_info["demand"] + "万kW / 供給力" + current_info["supply"] + "万kW、" + current_info["time"] + "時点"
+mdtext += "\n###### 使用電力" + current_info["demand"] + "万kW / 供給力" + current_info["supply"] + "万kW、" + current_info["time"] + "時点（データ更新：" + dt_now.strftime('%-m月%-d日 %-H:%M') + "）"
 mdtext += "\n本日の電力使用率推移"
 
 markdown = {
@@ -210,16 +213,13 @@ with open(DIR_DATA + "component-markdown.json", 'w') as f:
 
 
 # Update "update-time.json"
-dt_now = datetime.datetime.now()
+dt_now = datetime.datetime.now() + datetime.timedelta(hours = 9)
 dt_str = dt_now.strftime('%Y-%m-%d %H:%M:%S')
 latest = {
   'file_update': dt_str
 }
 with open(DIR_DATA + "update-time.json", 'w') as f:
   json.dump(latest, f, ensure_ascii = False)
-
-
-
 
 
 
