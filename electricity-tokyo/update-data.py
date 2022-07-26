@@ -5,6 +5,7 @@ import requests
 import json
 
 
+
 DIR_DATA = "./electricity-tokyo/"
 
 
@@ -211,6 +212,10 @@ with open(DIR_DATA + "component-markdown.json", 'w') as f:
   json.dump(markdown, f, ensure_ascii = False)
 
 
+# Update "current-info.json"
+with open(DIR_DATA + "current-info.json", 'w') as f:
+  json.dump(current_info, f, ensure_ascii = False)
+
 
 # Update "update-time.json"
 dt_now = datetime.datetime.now() + datetime.timedelta(hours = 9)
@@ -220,8 +225,6 @@ latest = {
 }
 with open(DIR_DATA + "update-time.json", 'w') as f:
   json.dump(latest, f, ensure_ascii = False)
-
-
 
 
 
