@@ -194,11 +194,11 @@ with open(DIR_DATA + "component-chart.json", 'w') as f:
 # Update "component-markdown.json"
 dt_now = datetime.datetime.now() + datetime.timedelta(hours = 9)
 
-mdtext  = "現在の電力使用率"
+mdtext  = "東京電力エリアの電力使用率"
 mdtext += "\n# " + current_info["ratio"] + "％"
 mdtext += "\n### ［" + current_info["label"] + "］"
 mdtext += "\n###### 使用電力" + current_info["demand"] + "万kW / 供給力" + current_info["supply"] + "万kW、" + current_info["time"] + "時点（データ更新：" + dt_now.strftime('%-m月%-d日 %-H:%M') + "）"
-mdtext += "\n本日の電力使用率推移"
+mdtext += "\n使用電力・供給力の推移"
 
 markdown = {
   "componentName": "Markdown",
