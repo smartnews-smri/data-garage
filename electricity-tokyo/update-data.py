@@ -48,15 +48,17 @@ result = {
           "data": [],
           "name": "供給実績",
           "type": "line",
+          "step": "middle",
           "lineStyle": {
-            "width": 4
+            "width": 3
           }
         }, {
           "data": [],
           "name": "供給予想",
           "type": "line",
+          "step": "middle",
           "lineStyle": {
-            "width": 4
+            "width": 3
           }
         }
       ]
@@ -91,10 +93,10 @@ result = {
         }
       },
       "color": [
-        '#c2beb4',
-        '#FCD055',
-        '#d4a9a5',
-        '#f57064'
+        '#a3bfcc',
+        '#1d78a3',
+        '#dbcfaf',
+        '#ebb736'
       ]
     },
     "dark": {
@@ -126,10 +128,10 @@ result = {
         }
       },
       "color": [
-        '#c2beb4',
-        '#FCD055',
-        '#d4a9a5',
-        '#f57064'
+        '#9babaa',
+        '#04d4c6',
+        '#d4d0b4',
+        '#f2da3f'
       ]
     }
   }
@@ -225,6 +227,8 @@ latest = {
 }
 with open(DIR_DATA + "update-time.json", 'w') as f:
   json.dump(latest, f, ensure_ascii = False)
+
+
 
 
 
