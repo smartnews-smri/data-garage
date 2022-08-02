@@ -194,23 +194,249 @@ with open(DIR_DATA + "component-chart.json", 'w') as f:
   json.dump(result, f, ensure_ascii = False)
 
 
-# Update "component-markdown.json"
+# Update "component-summary.json"
 dt_now = datetime.datetime.now() + datetime.timedelta(hours = 9)
-
-mdtext  = "東京電力エリアの電力使用率"
-mdtext += "\n# " + current_info["ratio"] + "％"
-mdtext += "\n### ［" + current_info["label"] + "］"
-mdtext += "\n###### 使用電力" + current_info["demand"] + "万kW / 供給力" + current_info["supply"] + "万kW、" + current_info["time"] + "時点（データ更新：" + dt_now.strftime('%-m月%-d日 %-H:%M') + "）"
-mdtext += "\n使用電力・供給力の推移"
+mdtext = "使用電力" + current_info["demand"] + "万kW / 供給力" + current_info["supply"] + "万kW、" + current_info["time"] + "時点（データ更新：" + dt_now.strftime('%-m月%-d日 %-H:%M') + "）"
 
 markdown = {
-  "componentName": "Markdown",
-  "config": {
-    "markdown": mdtext
-  }
+	"componentName": "ComponentList",
+	"config": {
+		"components": [{
+			"componentName": "Theme",
+			"config": {
+				"defaultFontScalar": 16,
+				"colorScheme": "all",
+				"text": {
+					"h1": {
+						"fontSize": "0.7rem",
+						"lineHeight": "1.2em",
+						"color": "#888"
+					},
+					"h2": {},
+					"h3": {},
+					"h4": {},
+					"h5": {
+						"color": "#888"
+					},
+					"h6": {},
+					"subtitle1": {},
+					"subtitle2": {},
+					"caption": {},
+					"body1": {
+						"fontSize": "1.2rem",
+						"color": "#fff",
+						"fontWeight": "bold"
+					},
+					"body2": {
+						"color": current_info["color"],
+						"fontSize": "1.5rem",
+						"lineHeight": "1.5em"
+					},
+					"link": {},
+					"label": {},
+					"button": {}
+				},
+				"icons": {
+					"inline": {},
+					"link": {}
+				},
+				"components": [{
+					"componentName": "Container",
+					"config": {
+						"components": [{
+							"componentName": "Container",
+							"config": {
+								"components": [{
+									"componentName": "ContainerWithAspectRatio",
+									"config": {
+										"components": [{
+											"componentName": "Chart",
+											"config": {
+												"isActive": True,
+												"tooltipFormatterType": "basic",
+												"base": {
+													"margin": 0,
+													"series": [{
+														"type": "gauge",
+														"radius": "100%",
+														"startAngle": 90,
+														"endAngle": -270,
+														"pointer": {
+															"show": False
+														},
+														"progress": {
+															"show": True,
+															"overlap": False,
+															"roundCap": True,
+															"clip": False,
+															"itemStyle": {
+																"borderWidth": 0,
+																"borderColor": "#464646",
+																"color": current_info["color"],
+
+															}
+														},
+														"axisLine": {
+															"lineStyle": {
+																"width": 6
+															}
+														},
+														"splitLine": {
+															"show": False,
+															"distance": 0,
+															"length": 10
+														},
+														"axisTick": {
+															"show": False
+														},
+														"axisLabel": {
+															"show": False,
+															"distance": 50
+														},
+														"data": [{
+															"value": current_info["ratio"],
+															"name": "Perfect",
+															"title": {
+																"show": False
+															},
+															"detail": {
+																"valueAnimation": True,
+																"offsetCenter": ["0%", "0%"],
+																"fontSize": 72,
+																"color": current_info["color"],
+																"itemStyle": {
+																	"borderWidth": 0,
+																	"color": current_info["color"]
+																}
+															}
+														}],
+														"title": {
+															"fontSize": 14
+														},
+														"detail": {
+															"width": 3,
+															"height": 14,
+															"fontSize": 14,
+															"color": "auto",
+															"borderColor": "auto",
+															"borderRadius": 0,
+															"borderWidth": 0,
+															"formatter": "{value}%"
+														},
+														"series": [{
+															"data": [{
+																"value": current_info["ratio"],
+																"name": "Perfect",
+																"title": {
+																	"show": False
+																},
+																"detail": {
+																	"valueAnimation": True,
+																	"offsetCenter": ["0%", "0%"],
+																	"fontSize": 16,
+																	"color": current_info["color"],
+																	"itemStyle": {
+																		"borderWidth": 0,
+																		"color": current_info["color"]
+																	}
+																}
+															}],
+															"pointer": {
+																"show": False
+															}
+														}]
+													}]
+												},
+												"light": {},
+												"dark": {}
+											}
+										}],
+										"aspectRatio": 1
+									}
+								}],
+								"styles": {
+									"display": "block",
+									"flexDirection": "column",
+									"border": {},
+									"margin": {
+										"top": "0.25rem",
+										"bottom": "1.25rem"
+									},
+									"padding": {},
+									"height": "240px",
+									"justifyContent": "center",
+									"alignItems": "center",
+									"width": "240px"
+								}
+							}
+						}, {
+							"componentName": "Container",
+							"config": {
+								"components": [{
+									"componentName": "Text",
+									"config": {
+										"type": "body1",
+										"styles": {
+											"margin": {
+												"left": 0,
+												"right": 0,
+												"top": 8,
+												"bottom": 8
+											},
+											"padding": {
+												"left": 0,
+												"right": 0,
+												"top": 0,
+												"bottom": 0
+											}
+										},
+										"content": current_info["label"]
+									}
+								}],
+								"styles": {
+									"display": "block",
+									"flexDirection": "row",
+									"border": {},
+									"margin": {},
+									"padding": {
+										"top": "0.125rem",
+										"bottom": "0.125rem"
+									},
+									"justifyContent": "center",
+									"alignItems": "center",
+									"backgroundColor": current_info["color"],
+									"width": 200,
+									"textAlign": "center"
+								}
+							}
+						}],
+						"styles": {
+							"display": "flex",
+							"flexDirection": "column",
+							"border": {},
+							"margin": {
+								"left": "0.5rem",
+								"right": "0.5rem",
+								"bottom": "1rem"
+							},
+							"padding": {},
+							"justifyContent": "center",
+							"alignItems": "center"
+						}
+					}
+				}, {
+					"componentName": "Text",
+					"config": {
+						"type": "h5",
+						"content": mdtext
+					}
+				}]
+			}
+		}]
+	}
 }
 
-with open(DIR_DATA + "component-markdown.json", 'w') as f:
+with open(DIR_DATA + "component-summary.json", 'w') as f:
   json.dump(markdown, f, ensure_ascii = False)
 
 
