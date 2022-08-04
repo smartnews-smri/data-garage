@@ -167,15 +167,15 @@ for i in range(14, 38):
         current_info["demand"] = current_row[2]
         current_info["supply"] = current_row[5]
         current_info["label"]  = "安定的"
-        current_info["color"]  = "#4dad38"
+        current_info["color"]  = "#28a148"
 
         if int(current_info["ratio"]) >= 92:
           current_info["label"]  = "厳しい"
-          current_info["color"]  = "#ffcc17"
+          current_info["color"]  = "#ebc000"
 
         if int(current_info["ratio"]) >= 97:
           current_info["label"]  = "非常に厳しい"
-          current_info["color"]  = "#fb1b2a"
+          current_info["color"]  = "#d93725"
 
   else:
     past_demand = int(row[2])
