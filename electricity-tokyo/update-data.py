@@ -20,12 +20,12 @@ result = {
       "grid": {
         "left": 10,
         "right": 0,
-        "top": 36,
+        "top": 58,
         "bottom": 0,
         "containLabel": True
       },
       "legend": {
-        "data": ["需要実績", "需要予想", "供給実績", "供給予想"]
+        "data": ["需要実績", "予想需要", "供給力実績", "予想供給力"]
       },
       "xAxis": {
         "type": "category",
@@ -41,12 +41,12 @@ result = {
           "stack": "total"
         }, {
           "data": [],
-          "name": "需要予想",
+          "name": "予想需要",
           "type": "bar",
           "stack": "total"
         }, {
           "data": [],
-          "name": "供給実績",
+          "name": "供給力実績",
           "type": "line",
           "step": "middle",
           "lineStyle": {
@@ -54,7 +54,7 @@ result = {
           }
         }, {
           "data": [],
-          "name": "供給予想",
+          "name": "予想供給力",
           "type": "line",
           "step": "middle",
           "lineStyle": {
@@ -85,6 +85,9 @@ result = {
             "color": "#AEAEAE"
           }
         },
+				"axisLabel": {
+	        "formatter": '{value}万kW'
+				},
         "splitLine": {
           "lineStyle": {
             "color": "#AEAEAE",
@@ -120,6 +123,9 @@ result = {
             "color": "#E5E5E5"
           }
         },
+				"axisLabel": {
+	        "formatter": '{value}万kW'
+				},
         "splitLine": {
           "lineStyle": {
             "color": "#E5E5E5",
@@ -167,15 +173,15 @@ for i in range(14, 38):
         current_info["demand"] = current_row[2]
         current_info["supply"] = current_row[5]
         current_info["label"]  = "安定的"
-        current_info["color"]  = "#28a148"
+        current_info["color"]  = "#ff9900"
 
         if int(current_info["ratio"]) >= 92:
           current_info["label"]  = "厳しい"
-          current_info["color"]  = "#ebc000"
+          current_info["color"]  = "#ff9900"
 
         if int(current_info["ratio"]) >= 97:
           current_info["label"]  = "非常に厳しい"
-          current_info["color"]  = "#d93725"
+          current_info["color"]  = "#ff9900"
 
   else:
     past_demand = int(row[2])
@@ -369,46 +375,6 @@ markdown = {
 									"width": "240px"
 								}
 							}
-						}, {
-							"componentName": "Container",
-							"config": {
-								"components": [{
-									"componentName": "Text",
-									"config": {
-										"type": "body1",
-										"styles": {
-											"margin": {
-												"left": 0,
-												"right": 0,
-												"top": 8,
-												"bottom": 8
-											},
-											"padding": {
-												"left": 0,
-												"right": 0,
-												"top": 0,
-												"bottom": 0
-											}
-										},
-										"content": current_info["label"]
-									}
-								}],
-								"styles": {
-									"display": "block",
-									"flexDirection": "row",
-									"border": {},
-									"margin": {},
-									"padding": {
-										"top": "0.125rem",
-										"bottom": "0.125rem"
-									},
-									"justifyContent": "center",
-									"alignItems": "center",
-									"backgroundColor": current_info["color"],
-									"width": 200,
-									"textAlign": "center"
-								}
-							}
 						}],
 						"styles": {
 							"display": "flex",
@@ -453,8 +419,4 @@ latest = {
 }
 with open(DIR_DATA + "update-time.json", 'w') as f:
   json.dump(latest, f, ensure_ascii = False)
-
-
-
-
 
